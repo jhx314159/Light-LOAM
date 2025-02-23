@@ -19,9 +19,9 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 #find_package(Eigen3 REQUIRED)
-find_package(PCL 1.10 REQUIRED)
+find_package(PCL REQUIRED)
 find_package(OpenCV REQUIRED)
-find_package(Ceres 2.3 REQUIRED)
+find_package(Ceres  REQUIRED)
 FIND_PACKAGE(OpenMP REQUIRED)
 if(OPENMP_FOUND)
     message("OPENMP FOUND")

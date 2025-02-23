@@ -7,6 +7,21 @@ This is the implementation for the Paper ``Light-LOAM: A Lightweight LiDAR Odome
 * ROS
 * Ceres 1.14.x
 
+## git指令
+
+```bash
+git add .
+git commit -m '修改lioloc.cpp，支持p2s和GICP分开执行4'
+git push origin main
+```
+## 编译运行指令
+
+```bash
+catkin_make -j10
+source devel/setup.bash
+roslaunch light_loam light_loam_velodyne_guangzhou_port.launch
+```
+
 ## Introduction
 This is the beta version, and the final implementation code is coming soon. The research paper [Light-LOAM: A Lightweight LiDAR Odometry and Mapping based on Graph-Matching](https://arxiv.org/abs/2310.04162) is now availble on arXiv.
 
