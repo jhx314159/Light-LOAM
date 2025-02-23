@@ -121,7 +121,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr &laserCloudMsg)
     removeClosedPointCloud(laserCloudIn, laserCloudIn, MINIMUM_RANGE);
 
 
-    // ----------------------------------------------------------------------------------------------
+    // ---------------这一步骤只适合旋转式的雷达，有ring才能基于旋转时间计算intensity------------------
     int cloudSize = laserCloudIn.points.size();
 
     std::cout << "before allocating scanID, cloudSize = " << cloudSize << "   " << std::endl;
