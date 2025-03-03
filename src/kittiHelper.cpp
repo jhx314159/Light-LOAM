@@ -47,18 +47,18 @@ int main(int argc, char** argv)
     n.getParam("publish_delay", publish_delay);
     publish_delay = publish_delay <= 0 ? 1 : publish_delay;
 
-    ros::Publisher pub_laser_cloud = n.advertise<sensor_msgs::PointCloud2>("/velodyne_points", 2);
+    ros::Publisher pub_laser_cloud = n.advertise<sensor_msgs::PointCloud2>("velodyne_points", 2);
 
     image_transport::ImageTransport it(n);
-    image_transport::Publisher pub_image_left = it.advertise("/image_left", 2);
-    image_transport::Publisher pub_image_right = it.advertise("/image_right", 2);
+    image_transport::Publisher pub_image_left = it.advertise("image_left", 2);
+    image_transport::Publisher pub_image_right = it.advertise("image_right", 2);
 
-    ros::Publisher pubOdomGT = n.advertise<nav_msgs::Odometry> ("/odometry_gt", 5);
+    ros::Publisher pubOdomGT = n.advertise<nav_msgs::Odometry> ("odometry_gt", 5);
     nav_msgs::Odometry odomGT;
     odomGT.header.frame_id = "map";
     odomGT.child_frame_id = "ground_truth";
 
-    ros::Publisher pubPathGT = n.advertise<nav_msgs::Path> ("/path_gt", 5);
+    ros::Publisher pubPathGT = n.advertise<nav_msgs::Path> ("path_gt", 5);
     nav_msgs::Path pathGT;
     pathGT.header.frame_id = "map";
 

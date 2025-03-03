@@ -229,7 +229,7 @@ void laserOdometryHandler(const nav_msgs::Odometry::ConstPtr &laserOdometry)
 			
 	nav_msgs::Odometry odomAftMapped;
 	odomAftMapped.header.frame_id = "map";
-	odomAftMapped.child_frame_id = "base_link";
+	odomAftMapped.child_frame_id = "base_link_light_loam";
 	odomAftMapped.header.stamp = laserOdometry->header.stamp;
 	// odomAftMapped.pose.pose.orientation.x = q_w_curr.x();
 	// odomAftMapped.pose.pose.orientation.y = q_w_curr.y();
@@ -2262,7 +2262,7 @@ void process()
 
 			nav_msgs::Odometry odomAftMapped;
 			odomAftMapped.header.frame_id = "map";
-			odomAftMapped.child_frame_id = "base_link";
+			odomAftMapped.child_frame_id = "base_link_light_loam";
 			odomAftMapped.header.stamp = ros::Time().fromSec(timeLaserOdometry);
 			odomAftMapped.pose.pose.orientation.x = q_w_curr.x();
 			odomAftMapped.pose.pose.orientation.y = q_w_curr.y();
@@ -2344,7 +2344,7 @@ void process()
 			q.setY(q_w_curr.y());
 			q.setZ(q_w_curr.z());
 			transform.setRotation(q);
-			br.sendTransform(tf::StampedTransform(transform, odomAftMapped.header.stamp, "map", "base_link"));
+			br.sendTransform(tf::StampedTransform(transform, odomAftMapped.header.stamp, "map", "base_link_light_loam"));
 
 			frameCount++;
 			now_frame++;
@@ -2361,33 +2361,33 @@ int main(int argc, char **argv)
 
 	float lineRes = 0;
 	float planeRes = 0;
-	nh.param<float>("mapping_line_resolution", lineRes, 0.4);
-	nh.param<float>("mapping_plane_resolution", planeRes, 0.8);
-	nh.param<std::string>("RESULT_PATH", RESULT_PATH, " ");
+	nh.param<float>("/light_loam_ns/mapping_line_resolution", lineRes, 0.4);
+	nh.param<float>("/light_loam_ns/mapping_plane_resolution", planeRes, 0.8);
+	nh.param<std::string>("/light_loam_ns/RESULT_PATH", RESULT_PATH, " ");
 	std::cout<<"RESULT_PATH:" <<RESULT_PATH <<std::endl;
 	//printf("line resolution %f plane resolution %f \n", lineRes, planeRes);
 	downSizeFilterCorner.setLeafSize(lineRes, lineRes,lineRes);
 	downSizeFilterSurf.setLeafSize(planeRes, planeRes, planeRes);
 
-	ros::Subscriber subLaserCloudCornerLast = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_corner_last", 100, laserCloudCornerLastHandler);
+	ros::Subscriber subLaserCloudCornerLast = nh.subscribe<sensor_msgs::PointCloud2>("laser_cloud_corner_last", 100, laserCloudCornerLastHandler);
 
-	ros::Subscriber subLaserCloudSurfLast = nh.subscribe<sensor_msgs::PointCloud2>("/laser_cloud_surf_last", 100, laserCloudSurfLastHandler);
+	ros::Subscriber subLaserCloudSurfLast = nh.subscribe<sensor_msgs::PointCloud2>("laser_cloud_surf_last", 100, laserCloudSurfLastHandler);
 
-	ros::Subscriber subLaserOdometry = nh.subscribe<nav_msgs::Odometry>("/laser_odom_to_init", 100, laserOdometryHandler);
+	ros::Subscriber subLaserOdometry = nh.subscribe<nav_msgs::Odometry>("laser_odom_to_init", 100, laserOdometryHandler);
 
-	ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2>("/velodyne_cloud_3", 100, laserCloudFullResHandler);
+	ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2>("velodyne_cloud_3", 100, laserCloudFullResHandler);
 
-	pubLaserCloudSurround = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_surround", 100);
+	pubLaserCloudSurround = nh.advertise<sensor_msgs::PointCloud2>("laser_cloud_surround", 100);
 
-	pubLaserCloudMap = nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_map", 100);
+	pubLaserCloudMap = nh.advertise<sensor_msgs::PointCloud2>("laser_cloud_map", 100);
 
-	pubLaserCloudFullRes = nh.advertise<sensor_msgs::PointCloud2>("/velodyne_cloud_registered", 100);
+	pubLaserCloudFullRes = nh.advertise<sensor_msgs::PointCloud2>("velodyne_cloud_registered", 100);
 
-	pubOdomAftMapped = nh.advertise<nav_msgs::Odometry>("/aft_mapped_to_init", 100);
+	pubOdomAftMapped = nh.advertise<nav_msgs::Odometry>("loc_result", 100);
 
-	pubOdomAftMappedHighFrec = nh.advertise<nav_msgs::Odometry>("/aft_mapped_to_init_high_frec", 100);
+	pubOdomAftMappedHighFrec = nh.advertise<nav_msgs::Odometry>("OdomAftMappedHighFrec", 100);
 
-	pubLaserAfterMappedPath = nh.advertise<nav_msgs::Path>("/aft_mapped_path", 100);
+	pubLaserAfterMappedPath = nh.advertise<nav_msgs::Path>("aft_mapped_path", 100);
 
 	for (int i = 0; i < laserCloudNum; i++)
 	{

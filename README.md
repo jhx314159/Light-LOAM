@@ -19,7 +19,7 @@ git push origin main
 ```bash
 catkin_make -j10
 source devel/setup.bash
-roslaunch light_loam light_loam_velodyne_guangzhou_port.launch
+roslaunch light_loam light_loam-velodyne_guangzhou_port.launch
 ```
 
 ## Introduction

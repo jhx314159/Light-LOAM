@@ -12,6 +12,8 @@ Panels:
         - /mapping1
         - /mapping1/mappingPath1
         - /mapping1/allMapCloud1
+        - /mapping1/surround1
+        - /mapping1/currPoints1
         - /PointCloud21
       Splitter Ratio: 0.5
     Tree Height: 719
@@ -32,7 +34,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2
+    SyncSource: surround
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -142,7 +144,7 @@ Visualization Manager:
           Radius: 0.029999999329447746
           Shaft Diameter: 0.10000000149011612
           Shaft Length: 0.10000000149011612
-          Topic: /laser_odom_path
+          Topic: /light_loam_ns/laser_odom_path
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -198,7 +200,7 @@ Visualization Manager:
           Radius: 0.029999999329447746
           Shaft Diameter: 0.10000000149011612
           Shaft Length: 0.10000000149011612
-          Topic: /aft_mapped_path
+          Topic: /light_loam_ns/aft_mapped_path
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -252,7 +254,7 @@ Visualization Manager:
           Size (Pixels): 1
           Size (m): 0.05000000074505806
           Style: Squares
-          Topic: /laser_cloud_surround
+          Topic: /light_loam_ns/laser_cloud_surround
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -280,7 +282,7 @@ Visualization Manager:
           Size (Pixels): 2
           Size (m): 0.009999999776482582
           Style: Points
-          Topic: /velodyne_cloud_registered
+          Topic: /light_loam_ns/velodyne_cloud_registered
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -1144,7 +1146,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 337.56964111328125
+      Distance: 594.9130249023438
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -1152,17 +1154,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.12382197380065918
-        Y: 1.0319079160690308
+        X: 62.28429412841797
+        Y: 86.84387969970703
         Z: -2.3097987174987793
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3797963857650757
+      Pitch: 1.1947964429855347
       Target Frame: body
-      Yaw: 6.181826591491699
+      Yaw: 1.7086409330368042
     Saved: ~
 Window Geometry:
   Displays:
